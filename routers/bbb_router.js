@@ -617,6 +617,9 @@ router.post("/check_rpm", function(req, res) {
 						}
 					})
 				}
+				if(!session) {
+					res.send({message: "No live session found"})
+				}
 			})
 		})
 	}, 30000)

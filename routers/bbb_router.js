@@ -60,10 +60,26 @@ router.get("/data", function(req, res){
 		res.send(list);
 	})
 });
-
-
-
-
+router.get("/rpmfrombikeid", function(req,res) {
+	utils.findCurrentSessionUsingMachineID(req.body.bikeID).then(function(session) {
+		if (session) {
+			utils.findBikeData(session.sessionID).then(function(data) {
+					if (data) {
+						var token = jwt.sign({Currentrpm: hardware.rpm, bikeID: hardware.bikeID}, 'ashu1234');
+						res.json({
+							success: true,
+							token: token,
+							rpm: hardware.rpm,
+							ID: hardware.bikeID
+						})
+					}
+			});
+		}
+		else {
+			res.send({success:false, message: "No Session found"})
+		}
+	});
+});
 
 // get the last three bike data points of a user in a current session
 router.post("/data/last", function(req, res){
@@ -623,28 +639,7 @@ router.post("/check_rpm", function(req, res) {
 			})
 		})
 	}, 30000)
-})
-
-router.post("/rpmfrombikeid", function(req,res) {
-	utils.findCurrentSessionUsingMachineID(req.body.bikeID).then(function(session) {
-		if (session) {
-			utils.findBikeData(session.sessionID).then(function(data) {
-					if (data) {
-						var token = jwt.sign({Currentrpm: hardware.rpm, bikeID: hardware.bikeID}, 'ashu1234');
-						res.json({
-							success: true,
-							token: token,
-							rpm: hardware.rpm,
-							ID: hardware.bikeID
-						})
-					}
-			});
-		}
-		else {
-			res.send({success:false, message: "No Session found"})
-		}
-	});
-}); 
+}) 
  
 router.post("/check_tag", function(req, res) {
 	utils.registerTag(req.body.tagName, req.body.userID, req.body.machineID).then(function(pair) {

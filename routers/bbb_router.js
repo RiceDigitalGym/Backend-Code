@@ -82,7 +82,7 @@ router.get("/check_rpm", function(req, res) {
 				}
 			})
 		})
-	}, 30000)
+	}, 3000)
 }) 
 
 

@@ -336,6 +336,7 @@ router.post("/setup_account", function(req, res) {
 	utils.findUserUsingEmail(req.body.email).then(function(user) {
 		if (user) {
 			res.send({success: false, message: "A user with this email already exists."});
+			console.log("test test test")
 		}
 		else {
 			bcrypt.genSalt(10, function(err, salt) {

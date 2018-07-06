@@ -83,7 +83,25 @@ router.get("/check_rpm", function(req, res) {
 			})
 		})
 	}, 3000)
-}) 
+})
+
+router.get("/rpmfrombikeid", function(req,res) {
+	utils.findCurrentSessionUsingMachineID(req.body.bikeID).then(function(session) {
+		console.log("here1")
+		if (session) {
+			utils.findBikeData(session.sessionID).then(function(data) {
+				console.log("here2")
+				if (data) {
+					console.log("here3")
+				}
+			});
+		}
+		else {
+			console.log("here4 no session")
+			res.send({success:false, message: "No Session found"})
+		}
+	});
+}); 
 
 
 // get the last three bike data points of a user in a current session

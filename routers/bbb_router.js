@@ -65,8 +65,10 @@ router.get("/check_rpm", function(req, res) {
 	res.send({status: "received"})
 	setTimeout(function() {
 		utils.findRaspPiUsingSerial(req.body.serialNumber).then(function(RaspPi) {
+			console.log("got into finding Rasp pi")
 			utils.findCurrentSessionUsingMachineID(RaspPi.machineID).then(function(session) {
 				if (session) {
+					console.log("Session found")
 					utils.findRecentBikeData(session.sessionID, 30).then(function(data) {
 						if (!data) {
 							utils.endSession(RaspPi.machineID)
@@ -75,6 +77,7 @@ router.get("/check_rpm", function(req, res) {
 				}
 				if(!session) {
 					res.send({message: "No live session found"})
+					console.log("No Session found")
 				}
 			})
 		})

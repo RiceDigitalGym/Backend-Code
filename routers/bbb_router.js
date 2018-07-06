@@ -65,7 +65,7 @@ router.get("/check_rpm", function(req, res) {
 	console.log("got here 1")
 	res.send({status: "received"})
 	setTimeout(function() {
-		cosole.log("got here 2")
+		console.log("got here 2")
 		utils.findRaspPiUsingSerial(req.body.serialNumber).then(function(RaspPi) {
 			console.log("got here 3")
 			utils.findCurrentSessionUsingMachineID(RaspPi.machineID).then(function(session) {
@@ -84,6 +84,7 @@ router.get("/check_rpm", function(req, res) {
 		})
 	}, 30000)
 }) 
+
 
 // get the last three bike data points of a user in a current session
 router.post("/data/last", function(req, res){

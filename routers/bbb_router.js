@@ -69,13 +69,14 @@ router.get("/rpmfrombikeid", function(req,res) {
 			utils.findBikeData(session.sessionID).then(function(data) {
 				console.log("here2")
 				if (data) {
+					res.send({success:true, message: data})
 					console.log("here3")
 				}
 			});
 		}
 		else {
 			console.log("here4 no session")
-			res.send({success:false, message: "No Session found"})
+			res.send({success:false, message: "No live session found"})
 		}
     });
     }, 3000)
@@ -333,7 +334,6 @@ router.post("/setup_account", function(req, res) {
 	utils.findUserUsingEmail(req.body.email).then(function(user) {
 		if (user) {
 			res.send({success: false, message: "A user with this email already exists."});
-			console.log("test test test")
 		}
 		else {
 			bcrypt.genSalt(10, function(err, salt) {
@@ -622,7 +622,7 @@ router.post("/process_tag", function(req, res) {
 	})		
 })
 
-router.post("/check_rpm", function(req, res) {
+router.get("/check_rpm", function(req, res) {
 	res.send({status: "received"})
 	setTimeout(function() {
 		utils.findRaspPiUsingSerial(req.body.serialNumber).then(function(RaspPi) {

@@ -61,29 +61,26 @@ router.get("/data", function(req, res){
 	})
 });
 
-router.get("/check_rpm", function(req, res) {
-	console.log("got here 1")
-	res.send({status: "received"})
+router.get("/rpmfrombikeid", function(req,res) {
 	setTimeout(function() {
-		console.log("got here 2")
-		utils.findRaspPiUsingSerial(req.body.serialNumber).then(function(RaspPi) {
-			console.log("got here 3")
-			utils.findCurrentSessionUsingMachineID(RaspPi.machineID).then(function(session) {
-				if (session) {
-					utils.findRecentBikeData(session.sessionID, 30).then(function(data) {
-						if (!data) {
-							utils.endSession(RaspPi.machineID)
-						}
-					})
+	utils.findCurrentSessionUsingMachineID(req.body.bikeID).then(function(session) {
+		console.log("here1")
+		if (session) {
+			utils.findBikeData(session.sessionID, 30).then(function(data) {
+				console.log("here2")
+				if (data) {
+					console.log("here3")
+					res.send({success:true, message: data})
 				}
-				if(!session) {
-					res.send({message: "No live session found"})
-					console.log("got here 4")
-				}
-			})
-		})
-	}, 30000)
-}) 
+			});
+		}
+		else {
+			console.log("here4 no session")
+			res.send({success:false, message: "No live session found"})
+		}
+		});
+	},1000)
+}); 
 
 
 // get the last three bike data points of a user in a current session
@@ -627,8 +624,7 @@ router.post("/process_tag", function(req, res) {
 	})		
 })
 
-/*
-router.post("/check_rpm", function(req, res) {
+router.get("/check_rpm", function(req, res) {
 	res.send({status: "received"})
 	setTimeout(function() {
 		utils.findRaspPiUsingSerial(req.body.serialNumber).then(function(RaspPi) {
@@ -640,15 +636,10 @@ router.post("/check_rpm", function(req, res) {
 						}
 					})
 				}
-				if(!session) {
-					res.send({message: "No live session found"})
-				}
 			})
 		})
 	}, 30000)
 }) 
- 
-*/
 
 router.post("/check_tag", function(req, res) {
 	utils.registerTag(req.body.tagName, req.body.userID, req.body.machineID).then(function(pair) {

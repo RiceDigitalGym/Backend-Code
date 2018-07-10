@@ -82,16 +82,6 @@ router.get("/rpmfrombikeid", function(req,res) {
     }, 3000)
 })
 
-router.get("/testing"), function(req,res) {
-	utils.findBikeData(req.body.sessionID).then(function(data) {
-		console.log("here2")
-		if (data) {
-			res.send({success:true, message: data})
-			console.log("here3")
-		}
-	});
-}
-
 // get the last three bike data points of a user in a current session
 router.post("/data/last", function(req, res){
 	utils.findCurrentSessionUsingUserID(req.body.userID).then(function(session) {

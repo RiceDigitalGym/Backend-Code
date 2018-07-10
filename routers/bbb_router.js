@@ -78,17 +78,16 @@ router.get("/rpmfrombikeid", function(req,res) {
 			});
 		}
 		else {
-			utils.findBikeData(446).then(function(data){
-				if (data) {
-					BikeData.findAll({
-						limit:2,
-						order: ['stamp' , 'DESC']
-					})
-					res.send ({
-						success:false,
-						message: "your rpm was " + parseInt(data[0].rpm)
-					})
+			BikeData.findAll({
+				limit:2,
+				order: ['stamp', 'DESC'],
+				where: {
+					sessionID: 446
 				}
+			})
+			res.send({
+				success:false, 
+				message: "Your current rpm is " + parseInt(data[0].rpm)
 			})
 		}
     });

@@ -78,11 +78,10 @@ router.get("/rpmfrombikeid", function(req,res) {
 			});
 		}
 		else {
-			utils.findBikeData(446).then(function(data) {
-				if (data) {
-					console.log("here4 here4 here4 here4")
-				}
-			})
+			console.log("here4 no session")
+			res.send({success:false, 
+				message: "No live session found"
+				})
 		}
     });
     }, 3000)

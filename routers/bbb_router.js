@@ -78,23 +78,18 @@ router.get("/rpmfrombikeid", function(req,res) {
 			});
 		}
 		else {
-			BikeData.findAll({
-				limit:2,
-				order: ['stamp', 'DESC'],
-				where: {
-					sessionID: 446
-				}
-			}).then(function(data){
+			utils.findBikeData(446).then(function(data){
 				if (data) {
-					res.send({success:false, message: "Your current rpm is " + parseInt(data[0].rpm) })
+					res.send ({
+						success:false,
+						message: "your rpm was " + parseInt(data[1].rpm)
+					})
 				}
 			})
 		}
     });
     }, 3000)
 })
-
-//BikeData.findAll({where: {bikeID: req.body.id}, limit: 100, order: 'stamp desc'})
 
 // get the last three bike data points of a user in a current session
 router.post("/data/last", function(req, res){

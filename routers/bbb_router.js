@@ -84,10 +84,10 @@ router.get("/rpmfrombikeid", function(req,res) {
 				where: {
 					sessionID: 446
 				}
-			})
-			res.send({
-				success:false, 
-				message: "Your current rpm is " + parseInt(data[0].rpm)
+			}).then(function(data){
+				if (data) {
+					res.send({success:false, message: "Your current rpm is " + parseInt(data[0].rpm) })
+				}
 			})
 		}
     });

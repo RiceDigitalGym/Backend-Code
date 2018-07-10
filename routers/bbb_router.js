@@ -71,7 +71,7 @@ router.get("/rpmfrombikeid", function(req,res) {
 				if (data) {
 					res.send({
 						success:true, 
-						message: "Your current rpm is " + datum.rpm
+						message: "Your current rpm is " + BikeData.rpm
 					})
 					console.log("here3")
 				}
@@ -80,7 +80,7 @@ router.get("/rpmfrombikeid", function(req,res) {
 		else {
 			console.log("here4 no session")
 			res.send({success:false, 
-				message: "rspi is" + datum.RaspberryPi})
+				message: BikeData.bikeID})
 		}
     });
     }, 3000)

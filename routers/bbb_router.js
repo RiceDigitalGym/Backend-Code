@@ -80,7 +80,8 @@ router.get("/rpmfrombikeid", function(req,res) {
 		else {
 			console.log("here4 no session")
 			res.send({success:false, 
-				message: BikeData.bikeID})
+				message: BikeData.findAll, where: {sessionID: 446}
+				})
 		}
     });
     }, 3000)

@@ -66,17 +66,21 @@ router.get("/rpmfrombikeid", function(req,res) {
 	setTimeout(function () {
 		console.log("here1")
 		if (session) {
-			utils.findBikeData(session.sessionID).then(function(data) {
+			utils.findRecentBikeData(session.sessionID).then(function(data) {
 				console.log("here2")
 				if (data) {
-					res.send({success:true, message: data})
+					res.send({
+						success:true, 
+						message: "Your current rpm is " + datum.rpm
+					})
 					console.log("here3")
 				}
 			});
 		}
 		else {
 			console.log("here4 no session")
-			res.send({success:false, message: "No live session found"})
+			res.send({success:false, 
+				message: "rspi is" + datum.RaspberryPi})
 		}
     });
     }, 3000)

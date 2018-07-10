@@ -71,17 +71,19 @@ router.get("/rpmfrombikeid", function(req,res) {
 				if (data) {
 					res.send({
 						success:true, 
-						message: "Your current rpm is " + BikeData.rpm
+						message: "Your current rpm is " + parseInt(data[0].rpm)
 					})
 					console.log("here3")
 				}
 			});
 		}
 		else {
-			console.log("here4 no session")
-			res.send({success:false, 
-				message: rpm
-				})
+			utils.findRecentBikeData(446).then(function(data) {
+				if (data) {
+					res.send({success: false, 
+					message: "sup"})
+				}
+			})
 		}
     });
     }, 3000)

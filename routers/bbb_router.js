@@ -348,7 +348,7 @@ router.post("/setup_account", function(req, res) {
 								id: user.id,
 								email: user.email,
 								image: user.profilepicture,
-								message: "hi"
+								message: user
 							});
 						}
 						else{

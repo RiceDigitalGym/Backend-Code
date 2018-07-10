@@ -82,7 +82,7 @@ router.get("/rpmfrombikeid", function(req,res) {
 				if (data) {
 					res.send ({
 						success:false,
-						message: "your rpm was " + parseInt(data[0].rpm)
+						message: "your rpm was " + parseInt(data[1].rpm)
 					})
 				}
 			})

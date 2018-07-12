@@ -62,7 +62,7 @@ router.get("/data", function(req, res){
 });
 
 router.get("/rpmfrombikeid", function(req,res) {
-	utils.findCurrentSessionUsingMachineID(req.body.machineID).then(function(session) {
+	utils.findCurrentSessionUsingMachineID(req.machineID).then(function(session) {
 	setTimeout(function () {
 		console.log("here1")
 		if (session) {
@@ -90,6 +90,7 @@ router.get("/rpmfrombikeid", function(req,res) {
     });
     }, 3000)
 })
+
 
 // get the last three bike data points of a user in a current session
 router.post("/data/last", function(req, res){

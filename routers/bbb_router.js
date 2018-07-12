@@ -62,10 +62,9 @@ router.get("/data", function(req, res){
 });
 
 router.get("/rpmfrombikeid", function(req,res) {
-	utils.findCurrentSessionUsingMachineID(2).then(function(session) {
+	utils.findCurrentSessionUsingMachineID(req.body.machineID).then(function(session) {
 	setTimeout(function () {
 		console.log("here1")
-		console.log(machineID)
 		if (session) {
 			utils.findRecentBikeData(session.sessionID).then(function(data) {
 				console.log("here2")
@@ -79,14 +78,19 @@ router.get("/rpmfrombikeid", function(req,res) {
 			});
 		}
 		else {
-			utils.findBikeData(447).then(function(data){
+			utils.findBikeData(447).then(function(data){ //testing 
 				if (data) {
 					res.send ({
 						success:false,
-						message: "Your rpm was " + parseInt(data[0].rpm)
+						message: "Your last rpm was " + parseInt(data[0].rpm)
 					})
 				}
 			})
+			/*res.send({
+				success:false,
+				message:"No live data found with scanned bikeID"
+			})
+			*/
 		}
     });
     }, 3000)

@@ -72,6 +72,7 @@ router.get("/rpmfrombikeid", function(req,res) {
 					res.send({
 						success:true, 
 						message: "Your current rpm is " + parseInt(data[0].rpm)
+						rpm: data[0].rpm 
 					})
 					console.log("here3")
 				}

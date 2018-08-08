@@ -79,7 +79,7 @@ router.get("/rpmfrombikeid", function(req,res) {
 			});
 		}
 		else {
-			utils.findBikeData(447).then(function(data){ //testing 
+			utils.findBikeData(517).then(function(data){ //testing 
 				if (data) {
 					res.send ({
 						success:false,

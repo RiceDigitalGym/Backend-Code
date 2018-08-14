@@ -66,7 +66,7 @@ router.get("/rpmfrombikeid", function(req,res) {
 	utils.findCurrentSessionUsingMachineID(req.body.machineID).then(function(session) {
 	setTimeout(function () {
 		console.log("here1")
-		if (true) {
+		if (session) {
 			utils.findRecentBikeData(session.sessionID).then(function(data) {
 				console.log("here2")
 				if (data) {

@@ -83,6 +83,7 @@ router.get("/rpmfrombikeid", function(req,res) {
 		else {
 			utils.findRecentBikeData(551).then(function(data){ //testing 
 				console.log("here5")
+				console.log(data)
 				if (data) {
 					res.send ({
 						success:false,

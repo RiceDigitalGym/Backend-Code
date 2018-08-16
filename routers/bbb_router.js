@@ -88,7 +88,7 @@ router.get("/rpmfrombikeid", function(req,res) {
 					res.send ({
 						success:false,
 						message: "Your last rpm was " + parseInt(data.dataValues.rpm),
-						rpm: data[0].rpm 
+						rpm: data.dataValues.rpm 
 					})
 				}
 			})

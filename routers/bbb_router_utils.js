@@ -183,16 +183,14 @@ function findBikeData(sessionID) {
 // }
 
 function findRecentBikeData(sessionID) {
-	return BikeData.find({
+	return BikeData.findOne({
 		where: {
 			sessionID: sessionID
-		}
-	},
-	{
-		sort: {stamp: -1}
-	},
-	limit: 1
-	);
+		},
+		order: [
+			['stamp', 'DESC']
+		]
+	});
 }
 
 function findRaspPiUsingSerial(serialNumber) {

@@ -68,20 +68,20 @@ router.get("/rpmfrombikeid", function(req,res) {
 		console.log("here1")
 		if (session) {
 			utils.findRecentBikeData(session.sessionID).then(function(data) {
-				console.log("here2")
+				console.log("here3")
 				if (data) {
 					res.send({
 						success:true, 
 						message: "Your current rpm is " + parseInt(data[0].rpm)
 						// rpm: data[0].rpm 
 					})
-					console.log("here3")
+					console.log("here4")
 				}
 			});
 		}
 		else {
 			utils.findBikeData(447).then(function(data){ //testing 
-				console.log("here4")
+				console.log("here5")
 				if (data) {
 					res.send ({
 						success:false,

@@ -186,8 +186,11 @@ function findRecentBikeData(sessionID) {
 	return BikeData.findOne({
 		where: {
 			sessionID: sessionID
+		}, 
+		{
+			sort: {stamp: -1}
 		}
-	}).sort({stamp: -1})
+	})
 }
 
 function findRaspPiUsingSerial(serialNumber) {

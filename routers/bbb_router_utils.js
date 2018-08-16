@@ -182,7 +182,7 @@ function findBikeData(sessionID) {
 // 	})
 // }
 
-function findMostRecentBikeData(sessionID) {
+function findRecentBikeData(sessionID) {
 	return BikeData.findOne({
 		where: {
 			sessionID: sessionID
